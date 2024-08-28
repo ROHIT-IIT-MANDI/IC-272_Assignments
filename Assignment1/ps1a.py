@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+import matplotlib.pyplot as plt
 
 
 def mean(values):
@@ -54,16 +55,34 @@ moisture_data = df['moisture']
 station_ids = df['stationid']
 
 arr = [temp_data,humidity_data,pressure_data,rain_data,lightavg_data,lightmax_data,moisture_data]
+parameter = ["Temperature","Humidity","Pressure","Rain","Lightavg","Lightmax","Moisture"]
 
 print("Mean of the temperature is : ",mean(temp_data))
 print("Max of the temperature is : ",maximum(temp_data))
 print("Min of the temperature is : ",minimum(temp_data))
 print("STD of the temperature is : ",STD(temp_data))
 
+print()
+
+k = 0
+l = 0
 for i in arr:
+    print(parameter[k],end=" ")
     for j in arr:
+        
         print(pearson(i,j),end=" | ")
+    k+=1
     print()
     print("_")
     print()
+
+x = []
+k = 0 
+for i in station_ids:
+    if i=="t12":
+        x.append(humidity_data[k])
+    k+=1
+
+plt.hist(x,edgecolor="red",bins=5)
+plt.show()
         
