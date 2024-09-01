@@ -1,5 +1,5 @@
 import pandas as pd
-import numpy as nmp
+import numpy as np
 import matplotlib.pyplot as plt
 
 # Load the dataset
@@ -14,19 +14,19 @@ missing_threshold = filtered_data1.shape[1] * (2/3)
 filtered_data2 = filtered_data1.dropna(thresh=missing_threshold)
 data_with_extremes = filtered_data2
 
-cols_array = nmp.array(filtered_data2.columns)
+cols_array = np.array(filtered_data2.columns)
 
 # Function for performing linear interpolation
 def interp_linear(vals):
     altered_indices = []
     for idx in range(len(vals)):
-        if nmp.isnan(vals[idx]):
+        if np.isnan(vals[idx]):
             prior_idx = idx - 1
-            while prior_idx >= 0 and nmp.isnan(vals[prior_idx]):
+            while prior_idx >= 0 and np.isnan(vals[prior_idx]):
                 prior_idx -= 1
 
             next_idx = idx + 1
-            while next_idx < len(vals) and nmp.isnan(vals[next_idx]):
+            while next_idx < len(vals) and np.isnan(vals[next_idx]):
                 next_idx += 1
 
             if prior_idx >= 0 and next_idx < len(vals):
@@ -48,8 +48,8 @@ cols_to_check = cols_array[2:]
 outlier_limits = []
 for idx in range(len(cols_to_check)):
     col_data = data_with_extremes[cols_to_check[idx]].values
-    first_quartile = nmp.percentile(col_data, 25)
-    third_quartile = nmp.percentile(col_data, 75)
+    first_quartile = np.percentile(col_data, 25)
+    third_quartile = np.percentile(col_data, 75)
     inter_quartile_range = third_quartile - first_quartile
     lower_limit = first_quartile - 1.5 * inter_quartile_range
     upper_limit = third_quartile + 1.5 * inter_quartile_range
@@ -95,8 +95,8 @@ means_before_std = []
 std_devs_before_std = []
 for col in cols_to_check:
     col_data = data_without_extremes[col].values
-    mean_value = nmp.mean(col_data)
-    std_dev_value = nmp.std(col_data)
+    mean_value = np.mean(col_data)
+    std_dev_value = np.std(col_data)
     means_before_std.append(mean_value)
     std_devs_before_std.append(std_dev_value)
     print(f'Pre-Standardization for {col}: mean = {mean_value}, std dev = {std_dev_value}')
@@ -115,8 +115,8 @@ means_after_std = []
 std_devs_after_std = []
 for col in cols_to_check:
     col_data = standardized_data[col].values
-    mean_value = nmp.mean(col_data)
-    std_dev_value = nmp.std(col_data)
+    mean_value = np.mean(col_data)
+    std_dev_value = np.std(col_data)
     means_after_std.append(mean_value)
     std_devs_after_std.append(std_dev_value)
     print(f'Post-Standardization for {col}: mean = {mean_value}, std dev = {std_dev_value}')
