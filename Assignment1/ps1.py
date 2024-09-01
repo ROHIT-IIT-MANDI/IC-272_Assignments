@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+import math
 import matplotlib.pyplot as plt
 
 
@@ -83,6 +84,29 @@ for i in station_ids:
         x.append(humidity_data[k])
     k+=1
 
-plt.hist(x,edgecolor="red",bins=5)
+df=df[df['stationid']=='t12']['humidity'].to_numpy()
+bin_size = 5
+min_value = math.floor(df.min())
+max_value = math.ceil(df.max())
+bins = list(range(min_value, max_value + bin_size, bin_size))
+histogram = {bin_value: 0 for bin_value in bins}
+
+for i in df:
+    for j in bins:
+        if j<=i < j+bin_size:
+            histogram[j]+=1
+            break
+
+bin_edges = list(histogram.keys())
+counts = list(histogram.values())
+
+plt.figure(figsize=(10,6))
+plt.bar(bin_edges, counts, width=bin_size, edgecolor="black", align = "edge", color="red")
+plt.title("Jumidity for stationid t12")
+plt.xlabel("Humidity")
+plt.ylabel("Frequency")
+plt.xticks(bin_edges)
 plt.show()
+
+
         

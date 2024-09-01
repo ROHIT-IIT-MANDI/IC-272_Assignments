@@ -1,6 +1,6 @@
 import numpy as np
 import pandas as pd
-
+import matplotlib.pyplot as plt
 
 def isK(k,para):
     for i in df[df[para].isna()].index:
@@ -134,9 +134,9 @@ for i in range(7):
     medians[i] = median(df[parameter[i]])
     stds[i] = STD(df[parameter[i]])
 
-print(means)
-print(medians)
-print(stds)
+print("Means are: ",means)
+print("Medians are: ",medians)
+print("Standard Deviations are: ",stds)
 
 original = pd.read_csv("landslide_data_original.csv")
 
@@ -146,5 +146,10 @@ for i in range(7):
     error[i] = rmse(original[parameter[i]],df[parameter[i]])
 
 print("ERROR IS : ", error)
+
+plt.bar(parameter,error)
+plt.xlabel("Attributes")
+plt.ylabel("RMSE")
+plt.show()
 
 
