@@ -20,14 +20,14 @@ def more(k,para):
 
 
 
-def rmse(arr1, arr2):
+def rmse(arr1, arr2,i):
     # Check if both arrays have the same length
     if len(arr1) != len(arr2):
         raise ValueError("Bhai kya kar rha h tu ?? Length hi same nhi h arrays ki")
     
+    inr = arr[i]
     # Calculate the squared differences
-    squared_diff = [(abs(x) - abs(y)) ** 2 for x, y in zip(arr1, arr2)]
-    
+    squared_diff = [(abs(arr1[j]) - abs(arr2[j])) ** 2 for j in inr]    
     # Calculate the mean of the squared differences
     mean_squared_diff = sum(squared_diff) / len(squared_diff)
     
@@ -145,7 +145,7 @@ original = pd.read_csv("landslide_data_original.csv")
 error = [0]*7
 
 for i in range(7):
-    error[i] = rmse(original[parameter[i]],df[parameter[i]])
+    error[i] = rmse(original[parameter[i]],df[parameter[i]],i)
 
 print("ERROR IS : ", error)
 

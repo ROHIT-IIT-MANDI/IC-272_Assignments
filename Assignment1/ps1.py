@@ -102,7 +102,7 @@ counts = list(histogram.values())
 
 plt.figure(figsize=(10,6))
 plt.bar(bin_edges, counts, width=bin_size, edgecolor="black", align = "edge", color="red")
-plt.title("Jumidity for stationid t12")
+plt.title("Humidity for stationid t12")
 plt.xlabel("Humidity")
 plt.ylabel("Frequency")
 plt.xticks(bin_edges)
