@@ -78,6 +78,7 @@ parameter = ["temperature","humidity","pressure","rain","lightavg","lightmax","m
 
 plot_boxplots(df)
 
+
 medians = [0]*7
 for i in range(7):
     medians[i] = median(df[parameter[i]])
@@ -91,6 +92,7 @@ after = pd.read_csv("after_removing_outliers.csv")
 #print(find_outliers(df["rain"]))
 
 plot_boxplots(after)
+
 
 
 

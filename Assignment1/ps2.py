@@ -23,10 +23,10 @@ def more(k,para):
 def rmse(arr1, arr2):
     # Check if both arrays have the same length
     if len(arr1) != len(arr2):
-        raise ValueError("Arrays must have the same length.")
+        raise ValueError("Bhai kya kar rha h tu ?? Length hi same nhi h arrays ki")
     
     # Calculate the squared differences
-    squared_diff = [(x - y) ** 2 for x, y in zip(arr1, arr2)]
+    squared_diff = [(abs(x) - abs(y)) ** 2 for x, y in zip(arr1, arr2)]
     
     # Calculate the mean of the squared differences
     mean_squared_diff = sum(squared_diff) / len(squared_diff)
@@ -83,7 +83,7 @@ def STD(values):
     m = mean2(values)
     for i in values:
         s+= ((i-m)**2)
-    return round(s/len(values),2)
+    return round((s/len(values))**0.5,2)
 
 
 
@@ -95,9 +95,11 @@ missing_indices = df[df["temperature"].isna()].index
 
 print(missing_indices)
 
-df = df.dropna(subset=["stationid"])
+df.cleaned = df.dropna(subset=["stationid"])
 
-##df.to_csv("after_deleting_values.csv",index = False)
+df_cleaned = df.dropna(thresh=6)
+
+##df_cleaned.to_csv("after_deleting3_values.csv",index = False)
 
 df = pd.read_csv("landslide_data_miss.csv")
 

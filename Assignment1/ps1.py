@@ -29,7 +29,7 @@ def STD(values):
     m = mean(values)
     for i in values:
         s+= ((i-m)**2)
-    return round(s/len(values),2)
+    return round((s/len(values))**0.5,2)
 
 
 def pearson(values1,values2):
@@ -86,8 +86,8 @@ for i in station_ids:
 
 df=df[df['stationid']=='t12']['humidity'].to_numpy()
 bin_size = 5
-min_value = math.floor(df.min())
-max_value = math.ceil(df.max())
+min_value = math.floor(minimum(df))
+max_value = math.ceil(maximum(df))
 bins = list(range(min_value, max_value + bin_size, bin_size))
 histogram = {bin_value: 0 for bin_value in bins}
 
