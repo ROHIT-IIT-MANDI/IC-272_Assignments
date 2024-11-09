@@ -1,0 +1,38 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.Card{
+    height: 50vh;
+    width: 20vw;
+    display:flex;
+    flex-direction: column;
+    border-radius: 1em;
+    box-shadow: 5em;
+    background-color: lightgray;
+    position: relative;
+
+
+}
+
+.image{
+    height:50%;
+    width:100%;
+    object-fit: fill;
+
+
+}
+
+.btn-red{
+    background-color: lightcoral;
+    width: 40%;
+    height: 6vh;
+    padding: 0.5em;
+    border-radius: 3em;
+    position: absolute;
+    bottom: 3vh;
+    left:30%;
+
+}
